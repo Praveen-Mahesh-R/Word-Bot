@@ -25,7 +25,7 @@ def get_synonyms(word):
         for lemma in synset.lemmas():
             if lemma:
                 synonyms.append(lemma.name())
-    return set(synonyms)
+    return list(set(synonyms))
 
 
 def get_antonyms(word):

@@ -1,8 +1,6 @@
-"""
-bot.py : Given a word, gets the meaning, synonyms and antonyms for the word
-"""
+
 import PySimpleGUI as sg
-from utils import get_meaning
+from utils import get_meaning, get_synonyms
 
 greeting = "Hi, I am a word bot. I can help you with words\n"
 
@@ -17,17 +15,25 @@ layout = [
 ]
 
 def display_meaning(word):
-    """
-    Displays the word and the meaning of the word
-    :param word: string, input word
-    """
     meaning = get_meaning(word)
     window['output'].print("WORD: " + word)
     if meaning:
-        window['output'].print("MEANING: ", meaning)
+        window['output'].print("MEANING: ", meaning + ".")
+    else:
+        display_error("Word is not found in corpus.")
+
+def display_synonyms(word):
+    synonyms = get_synonyms(word)
+    window['output'].print("WORD: "+ word)
+    if synonyms:
+        window['output'].print("SYNONYMS: ")
+        for synonym in synonyms:
+            if synonym != synonyms[-1]:
+                window['output'].print(synonym, end =", ")
+            else:
+                window['output'].print(synonym + ".")
     else:
         display_error("Word is not found in corpus")
-
 
 def display_error(message):
     """
@@ -46,4 +52,6 @@ if __name__ == '__main__':
             break
         elif event == 'meaning':
             display_meaning(values['input'])
+        elif event == 'synonym':
+            display_synonyms(values['input'])
     window.Close()
