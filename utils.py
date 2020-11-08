@@ -39,4 +39,4 @@ def get_antonyms(word):
         for lemma in synset.lemmas():
             if lemma.antonyms():
                 antonyms.append(lemma.antonyms()[0].name())
-    return set(antonyms)
+    return list(set(antonyms))

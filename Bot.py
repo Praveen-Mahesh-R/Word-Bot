@@ -1,6 +1,6 @@
 
 import PySimpleGUI as sg
-from utils import get_meaning, get_synonyms
+from utils import get_meaning, get_synonyms, get_antonyms
 
 greeting = "Hi, I am a word bot. I can help you with words\n"
 
@@ -35,6 +35,19 @@ def display_synonyms(word):
     else:
         display_error("Word is not found in corpus")
 
+def display_antonyms(word):
+    antonyms = get_antonyms(word)
+    window['output'].print("WORD: "+ word)
+    if antonyms:
+        window['output'].print("SYNONYMS: ")
+        for antonym in antonyms:
+            if antonym != antonyms[-1]:
+                window['output'].print(antonym, end =", ")
+            else:
+                window['output'].print(antonym + ".")
+    else:
+        display_error("Word is not found in corpus")
+
 def display_error(message):
     """
     Displays an error message in the output window
@@ -54,4 +67,6 @@ if __name__ == '__main__':
             display_meaning(values['input'])
         elif event == 'synonym':
             display_synonyms(values['input'])
+        elif event == 'antonym':
+            display_antonyms(values['input'])
     window.Close()
