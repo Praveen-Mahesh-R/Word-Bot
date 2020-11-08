@@ -69,4 +69,6 @@ if __name__ == '__main__':
             display_synonyms(values['input'])
         elif event == 'antonym':
             display_antonyms(values['input'])
+        elif event == 'clear':
+            window.FindElement('output').Update(value = greeting)
     window.Close()
